@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AnimkuCDN - Free Anime Thumbnail Image CDN</title>
+  <meta name="description"
+    content="High performance free WebP Anime Thumbnail CDN powered by GitHub Pages & jsDelivr. Scraped from Animku API.">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+
+  <div class="container">
+    <!-- Navbar -->
+    <header class="navbar">
+      <div class="logo-group">
+        <div class="logo-icon"><i class="fa-solid fa-bolt"></i></div>
+        <div class="logo-text">
+          <h1>AnimkuCDN</h1>
+          <p>Anime Thumbnail CDN & Image Storage</p>
+        </div>
+      </div>
+      <div class="nav-badges">
+        <span class="badge success"><i class="fa-solid fa-circle-check"></i> WebP Optimized</span>
+        <span class="badge primary" id="badgeTotalCount"><i class="fa-solid fa-images"></i> 0 Thumbnails</span>
+      </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+      <h2>Free Anime Thumbnail <span>CDN & Explorer</span></h2>
+      <p>Gambar thumbnail anime dikompresi ke format WebP super ringan & di-host secara gratis via GitHub Pages, Custom Domain (cdn.animku.my.id), dan jsDelivr.</p>
+    </section>
+
+    <!-- Toolbar & Search -->
+    <div class="toolbar">
+      <div class="search-box">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input type="text" id="searchInput" class="search-input" placeholder="Cari judul anime atau slug...">
+      </div>
+      <select id="typeFilter" class="filter-select">
+        <option value="">Semua Tipe</option>
+        <option value="TV">TV Series</option>
+        <option value="Movie">Movie</option>
+        <option value="ONA">ONA / OVA</option>
+        <option value="Special">Special</option>
+      </select>
+      <button class="btn btn-secondary" onclick="reloadCatalog()">
+        <i class="fa-solid fa-rotate-right"></i> Refresh
+      </button>
+    </div>
+
+    <!-- Stats & Info Bar -->
+    <div class="stats-bar">
+      <span id="displayCountText">Menampilkan 0 anime</span>
+      <span id="lastUpdatedText"><i class="fa-solid fa-clock"></i> Terakhir diperbarui: -</span>
+    </div>
+
+    <!-- Gallery Grid -->
+    <main id="galleryGrid" class="gallery-grid">
+      <!-- Cards will be populated dynamically -->
+    </main>
+
+    <!-- Integration & API Endpoints Docs -->
+    <section class="docs-section">
+      <h3><i class="fa-solid fa-code"></i> Cara Integrasi CDN Ke Web Anda</h3>
+      <p style="color: var(--text-muted); margin-bottom: 20px;">
+        Gunakan URL CDN berikut di elemen <code>&lt;img src="..."&gt;</code> web streaming / portal anime Anda.
+      </p>
+
+      <label style="font-weight: 600; font-size: 0.9rem; color: var(--text-muted); margin-bottom: 6px; display: block;">JSON Catalog Endpoint:</label>
+      <div class="endpoint-box">
+        <span id="jsonEndpointUrl">https://cdn.animku.my.id/cdn/data/anime_catalog.json</span>
+        <button class="btn-copy" style="width: auto; padding: 6px 12px;" onclick="copyToClipboard(document.getElementById('jsonEndpointUrl').innerText, 'JSON Catalog URL')">
+          <i class="fa-solid fa-copy"></i> Copy
+        </button>
+      </div>
+
+      <label style="font-weight: 600; font-size: 0.9rem; color: var(--text-muted); margin-bottom: 6px; display: block; margin-top: 16px;">Struktur Custom Domain CDN URL:</label>
+      <div class="endpoint-box">
+        <span>https://cdn.animku.my.id/cdn/thumbnails/{slug}.webp</span>
+      </div>
+
+      <label style="font-weight: 600; font-size: 0.9rem; color: var(--text-muted); margin-bottom: 6px; display: block; margin-top: 16px;">Struktur jsDelivr Global Edge CDN URL:</label>
+      <div class="endpoint-box">
+        <span>https://cdn.jsdelivr.net/gh/AnimkuCDN/AnimkuCDN@main/cdn/thumbnails/{slug}.webp</span>
+      </div>
+    </section>
+  </div>
+
+  <!-- Toast Notification -->
+  <div id="toast" class="toast">
+    <i class="fa-solid fa-circle-check"></i>
+    <span id="toastMsg">Link disalin ke clipboard!</span>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
